@@ -3,7 +3,6 @@ angular.module('hmModule').controller("MainController", function ($scope, $rootS
 {
     console.log("MainController called");
     $scope.names = ["chapter 1 physics", "chapter 2 physics", "chapter 3 physics"];
-    
     $scope.videoLibrary=VideoService.getVideoLibrary();
     
    $scope.changeIt = function () 

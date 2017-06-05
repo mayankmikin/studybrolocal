@@ -14,7 +14,8 @@ app.constant('urls', {
     VIDEO_SERVICE_API:"http://localhost:8088/sb/landing/video",
     VIDEO_Library_API:"http://localhost:8088/sb/landing/videolibrary",
     MENU_ITEM_ADD_API: "http://localhost:8088/sb/menu/create",
-    MENU_ITEM_ALL_API: "http://localhost:8088/sb/menu/all"
+    MENU_ITEM_ALL_API: "http://localhost:8088/sb/menu/all",
+    USER_ADD_API: "http://localhost:8088/sb/user/register"
 });
 
 app.constant('errors', {
@@ -73,6 +74,7 @@ app.config(function ($provide) {
     ]);
 });
 
+
 app.config(['$stateProvider', '$urlRouterProvider',
     function ($stateProvider, $urlRouterProvider, $provide) {
 
@@ -106,6 +108,14 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 url: '/Physics',
                 templateUrl: 'angulartemplates/vvdav.html',
                 controller: 'VLController',
+
+                requireLogin: false
+
+            })
+             .state('Register', {
+                url: '/register',
+                templateUrl: 'angulartemplates/register.html',
+                controller: 'RegisterController',
 
                 requireLogin: false
 
