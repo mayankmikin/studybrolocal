@@ -1,0 +1,38 @@
+        <!-- Logo -->
+                        <div class="logo">
+                            <a class="logo-wrap" href="#body">
+                            <!-- <img class="logo-img logo-img-main" src="logo_studybro.png" alt="StudyBRO  Logo"> -->
+                                
+                            </a>
+                        </div>
+                        <!-- End Logo -->
+               
+        <div class="menu-container" ng-controller="NavController">
+                            <ul class="nav navbar-nav navbar-nav-right">
+                <!-- if item is only 1 show as a link other wise show dropdown toshow further states -->
+                <li class="js_nav-item nav-item active" ng-repeat="item in items" ng-if="item.subItems.length<1">
+            <span data-ng-class="item.iconClass">
+                <a class="nav-item-child nav-item-hover" 
+                ng-href="#{{item.name}}">{{item.name}}</a>
+                </span>
+                </li>
+
+    <li class="dropdown" ng-if="item.subItems.length>=1" ng-repeat="item in items">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{item.name}}<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" >
+          <li ng-repeat="i in item.subItems">
+          <a href="#{{i.state}}">{{i.name}}</a>
+          </li>
+        </ul>
+    </li>
+
+
+                                <!-- <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#about">Subjects</a></li> -->
+                               <!--  <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#products">Products</a></li>
+                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#pricing">Pricing</a></li>
+                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#work">Work</a></li>
+                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#service">Service</a></li>
+                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#contact">Contact</a></li> -->
+                            </ul>
+                        </div>

@@ -1,0 +1,39 @@
+<div class="container">
+<div class="table-responsive">
+<table class="table table-striped">
+  <tr>
+    <td ng-repeat="x in names" ng-if="$index<end && $index>=start">
+    {{ x.name }}
+    </td>
+    <!-- <td>{{ x.country }}</td> -->
+    </tr>
+</table>
+ </div>
+  </div>
+<!-- pagination starts from here -->
+<nav aria-label="Page navigation example">
+<ul class="pagination justify-content-end">
+    <li class="page-item"
+    data-ng-class="{'disabled' : currentPage==1}"
+    >
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <!-- ng-repeat is similar to for loop -->
+
+    <li class="page-item" ng-repeat="x in names" 
+    data-ng-class="{'active' : (($index + 1)/pagesize) == currentPage}">
+    <!-- loop starts here --> 
+    <a class="page-link" ng-click="changepage(($index + 1)/pagesize)" ng-if="(($index + 1)%pagesize)==0">
+ {{($index + 1)/pagesize}}
+    </a>
+    <!-- loop ends here --> 
+    </li>
+
+    <li class="page-item"
+    data-ng-class="{'disabled' : (names.length/pagesize)==currentPage}">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+  </nav>
+  
+ 

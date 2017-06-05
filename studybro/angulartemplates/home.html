@@ -1,0 +1,55 @@
+
+<div class="container">
+    <div class="span8">
+    <div id="myCarousel" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+            <!-- <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="2" class=""></li> -->
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active embed-responsive embed-responsive-16by9">
+               
+               <div id="main_frame">
+               </div>
+
+            </div>
+            
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+    </div>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading"><h2>Current Video name</h2></div>
+      <div class="panel-body">
+        <button ng-click="changeIt()">Change it</button>
+
+     <!--  Controls for video and other content -->
+      <div class="container">
+  
+  <p>Please select a new video to get the list of all Videos For this chapter</p>
+        <select class="page-header-top-dropdown-style-option form-control input-sm">
+            <option ng-repeat="x in names">{{x}}</option>
+        </select>
+
+    </div>
+
+       <p>
+       Lecture Content Comes here  
+        </p>
+    </div>
+    </div>
+</div>
+<!-- last div ends here  -->
+
+
+<!--  <div class="col-sm-6">
+ 
+
+      <h2>4:3 Responsive Aspect Ratio</h2>
+<div class="embed-responsive embed-responsive-4by3">
+    <iframe class="embed-responsive-item" src="//www.youtube.com/embed/ePbKGoIGAXY"></iframe>
+</div>
+    </div> -->
