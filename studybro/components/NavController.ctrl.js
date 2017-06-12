@@ -43,7 +43,7 @@ angular.module('hmModule').controller("NavController", function($rootScope, $sco
         iconClass: "icon-home"
     }
     ];*/
-
+    
     $rootScope.items = MenuService.getall();
 
 

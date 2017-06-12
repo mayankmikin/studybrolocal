@@ -15,7 +15,8 @@ app.constant('urls', {
     VIDEO_Library_API:"http://localhost:8088/sb/landing/videolibrary",
     MENU_ITEM_ADD_API: "http://localhost:8088/sb/menu/create",
     MENU_ITEM_ALL_API: "http://localhost:8088/sb/menu/all",
-    USER_ADD_API: "http://localhost:8088/sb/user/register"
+    USER_ADD_API: "http://localhost:8088/sb/user/register",
+    USER_LOGIN_API:"http://localhost:8088/sb/user/login"
 });
 
 app.constant('errors', {
@@ -29,20 +30,12 @@ app.constant('context', {
 
 
 app.config(function ($provide) {
-    // $provide provider is used to register the components in angular internally.
-
-    // use decorator to customise the behaviour of a service. 
-    $provide.decorator('$exceptionHandler', ['$delegate', '$window', 'stacktraceService',
+   $provide.decorator('$exceptionHandler', ['$delegate', '$window', 'stacktraceService',
         function ($delegate, $window, stacktraceService) {
-
-            // exception: exception associated with the error
-            // cause: optional information about the context in which the error was thrown.
 
             return function (exception, cause) {
 
-                // $delegate: provides the original service to the method which is used to call the base implementation
-                // of $exceptionHandler service which internally delegates to $log.error.
-                $delegate(exception, cause);
+              $delegate(exception, cause);
 
                 var stacktrace = stacktraceService.print($window, exception);
 
@@ -54,19 +47,6 @@ app.config(function ($provide) {
                 };
 
                 console.log(clientSideErrorInfo.stacktrace);
-
-                // below code will send error to our server where we can log the errors of application and create an alert---[Mayank]
-
-                // the angular $http service cannot be used in the $log 
-                // decorator because it will cause a circular dependecy.
-                // to overcome this  a direct ajax call should be made.
-                // $.ajax({
-                //   type: 'POST',
-                //   url: '/logger/log', // this is the server end-point where you can log this error
-                //   contentType: 'application/json; charset=UTF-8',
-                //   data: JSON.stringify(clientSideErrorInfo)
-                // });
-                //$window.alert("Something went wrong please contact ADMIN ");
 
             };
 
@@ -80,14 +60,12 @@ app.config(['$stateProvider', '$urlRouterProvider',
 
         $stateProvider
     
-           /* .state('login', {
+            .state('login', {
                 url: '/login',
-                templateUrl: 'angulartemplates/fancylogin.html',
+                templateUrl: 'angulartemplates/login.html',
                 controller: 'LoginController',
-
                 requireLogin: false
-
-            })*/
+            })
             .state('home', {
                 url: '/home',
                 templateUrl: 'angulartemplates/home.html',
@@ -151,6 +129,65 @@ app.config(['$stateProvider', '$urlRouterProvider',
 
     }
 ]);
+
+
+app.run(function ($rootScope, $location, $state, LoginService, $localStorage, $sessionStorage, $cookieStore, $window) {
+   
+    $rootScope.$on('$stateChangeStart',
+        function (event, toState, toParams, fromState, fromParams) 
+    {
+            console.log('Changed state to: ');
+            console.log(toState);
+            if(toState.name=='login')
+            {
+                $rootScope.showsidebar=false;
+            }
+            else
+            {
+                $rootScope.showsidebar=true;
+            }
+
+            /*var requireLogin = toState.requireLogin;
+            // stopping user from going to any page using URL if not loggged in already
+            if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
+
+
+                console.log("user alreadynot logged in");
+                event.preventDefault();
+
+            } else {
+                if ($cookieStore.get('loggedin') == 'false' && $localStorage.user != null) {
+
+                    LoginService.clearUserVariables();
+                    $location.path('/');
+                } else if (($rootScope.authvariables != undefined)) {
+                    if (!($rootScope.authvariables.ClientsInfo["0"].ui_roles[$rootScope.authvariables.role["0"]].permissions.states.indexOf(toState.name) > -1)) {
+                        console.log("user not authorized to view this page ");
+                        event.preventDefault();
+                    }
+                }
+            }
+
+            $rootScope.title = 'Nv | ' + ($location.$$path).replace('/', '');
+*/
+        });
+
+    // check if user is already logged-in
+    /*if ($localStorage.user != null) 
+    {
+        //transfer user variables from localstorage to root scope 
+        LoginService.provideUserVariables();
+        //  $state.transitionTo('home');
+        $location.path('/home');
+
+    } else {
+        if (!LoginService.isAuthenticated()) {
+            $state.transitionTo('login');
+        }
+
+    }*/
+
+});
 
 
 

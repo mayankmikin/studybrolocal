@@ -1,38 +1,48 @@
-        <!-- Logo -->
-                        <div class="logo">
-                            <a class="logo-wrap" href="#body">
-                            <!-- <img class="logo-img logo-img-main" src="logo_studybro.png" alt="StudyBRO  Logo"> -->
-                                
-                            </a>
-                        </div>
-                        <!-- End Logo -->
-               
-        <div class="menu-container" ng-controller="NavController">
-                            <ul class="nav navbar-nav navbar-nav-right">
-                <!-- if item is only 1 show as a link other wise show dropdown toshow further states -->
-                <li class="js_nav-item nav-item active" ng-repeat="item in items" ng-if="item.subItems.length<1">
-            <span data-ng-class="item.iconClass">
-                <a class="nav-item-child nav-item-hover" 
-                ng-href="#{{item.name}}">{{item.name}}</a>
-                </span>
-                </li>
+ <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  -->                      
+ <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#home"><strong>Study BRO</strong></a>
+    </div>
 
-    <li class="dropdown" ng-if="item.subItems.length>=1" ng-repeat="item in items">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{item.name}}<span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" >
-          <li ng-repeat="i in item.subItems">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#home">Home<span class="sr-only">(current)</span></a></li>
+        <!-- <li><a href="#">Link</a></li> -->
+        <li  role="presentation" class="dropdown" ng-if="item.subItems.length>=1" ng-repeat="item in items">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{item.name}}<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li ng-repeat="i in item.subItems">
           <a href="#{{i.state}}">{{i.name}}</a>
           </li>
-        </ul>
-    </li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search Video or Topic">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#register">Sign Up</a></li>
 
-
-                                <!-- <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#about">Subjects</a></li> -->
-                               <!--  <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#products">Products</a></li>
-                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#pricing">Pricing</a></li>
-                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#work">Work</a></li>
-                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#service">Service</a></li>
-                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#contact">Contact</a></li> -->
-                            </ul>
-                        </div>
+        <li class="dropdown" ng-if="isUserLoggedIn">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user "></span>Profile<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Edit Profile</a></li>
+          </ul>
+        </li>
+        <li ng-if="!isUserLoggedIn"><a href="#login">Login</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

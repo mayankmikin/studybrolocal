@@ -5,6 +5,7 @@ angular.module('hmModule').controller("MainController", function ($scope, $rootS
     $scope.names = ["chapter 1 physics", "chapter 2 physics", "chapter 3 physics"];
     $scope.videoLibrary=VideoService.getVideoLibrary();
     
+    $rootScope.showsidebar=true;
    $scope.changeIt = function () 
     {
       $scope.video_url= VideoService.getLandingVideo();   //"https://www.youtube.com/embed/7V6FGF1ffgQ";
