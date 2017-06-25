@@ -1,55 +1,191 @@
 
-<div class="container">
-    <div class="span8">
-    <div id="myCarousel" class="carousel slide">
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-            <!-- <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="2" class=""></li> -->
-        </ol>
-        <div class="carousel-inner">
-            <div class="item active embed-responsive embed-responsive-16by9">
-               
-               <div id="main_frame">
-               </div>
-
-            </div>
-            
-        </div>
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
-    </div>
-    </div>
-
-    <div class="panel panel-primary">
-      <div class="panel-heading"><h2>Current Video name</h2></div>
-      <div class="panel-body">
-        <button ng-click="changeIt()">Change it</button>
-
-     <!--  Controls for video and other content -->
-      <div class="container">
-  
-  <p>Please select a new video to get the list of all Videos For this chapter</p>
-        <select class="page-header-top-dropdown-style-option form-control input-sm">
-            <option ng-repeat="x in names">{{x}}</option>
-        </select>
-
-    </div>
-
-       <p>
-       Lecture Content Comes here  
-        </p>
-    </div>
-    </div>
-</div>
-<!-- last div ends here  -->
-
-
-<!--  <div class="col-sm-6">
+<style type="text/css">
  
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
 
-      <h2>4:3 Responsive Aspect Ratio</h2>
-<div class="embed-responsive embed-responsive-4by3">
-    <iframe class="embed-responsive-item" src="//www.youtube.com/embed/ePbKGoIGAXY"></iframe>
-</div>
-    </div> -->
+.slide-image {
+    width: 100%;
+}
+
+.carousel-holder {
+    margin-bottom: 30px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+
+.caption {
+    height: 130px;
+    overflow: hidden;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+footer {
+    margin: 50px 0;
+}   
+
+</style>
+<!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <p class="lead">Download Now</p>
+                <div class="list-group">
+                    <a href="#" class="list-group-item">Class 11th Notes</a>
+                    <a href="#" class="list-group-item">Class 12th Notes</a>
+                    <a href="#" class="list-group-item">BCA Notes</a>
+                    <a href="#" class="list-group-item">MCA Notes</a>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+
+                <div class="row carousel-holder">
+
+                    <div class="col-md-12">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                </div>
+                                <div class="item">
+                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                </div>
+                                <div class="item">
+                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                </div>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div> 
+     <!-- main carousel ends here  -->
+
+        <div class="row" >
+        <div id="{{sub.subname}}" class="col" ng-repeat="sub in subjects">
+            <div class="panel panel-default panel-table">
+             <div class="panel-heading">
+                <div class="row">
+                  <div class="col col-xs-6">
+                    <h3 class="panel-title">{{sub.subname}}</h3>
+                  </div>
+                  <div class="col col-xs-6 text-right">
+                    <button type="button" class="btn btn-sm btn-primary btn-create">Get All Videos</button>
+                  </div>
+                </div>
+              </div>
+            <div class="panel-body">
+                <table class="table table-striped table-bordered table-list">
+                    <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="prop in getInmemorypages(sub.subname) | limitTo:'pagelimits'">
+                        <div class="thumbnail">
+                            <!-- <img src="http://placehold.it/320x150" alt=""> -->
+<iframe id="{{sub.subname}}-{{$index+1}}" class="col-lg-12 col-md-12 col-sm-12" src="{{prop.url_name | trustUrl}}" frameborder="0" allowfullscreen>
+</iframe>
+                            <div class="caption">
+                                <h4 class="pull-right">{{prop.description.price_status}}</h4>
+                            <h4><a href="#">{{prop.video_name}}</a>
+                                </h4>
+                                <p>Watch it on Youtube<a target="_blank" href="{{prop.url_name}}">Go to Direct Link</a>.</p>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">{{prop.description.review_counts}} reviews</p>
+                                <p>
+
+
+            <span class="glyphicon glyphicon-star" ng-repeat="n in range(prop.description.ratings)"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div> <!-- ngrepeat videourls ends here  -->
+                    </table>
+                     </div> <!-- panel body ends here  -->
+<div class="panel-footer">
+                      <!-- pager -->
+                 <div class="row">
+
+                  <div class="col col-xs-12">
+                <ul class="pagination hidden-xs pull-left" >
+                    <li data-ng-class="{'disabled' : currentPage==1}"><a href="#">«</a></li>
+
+
+    <li ng-repeat="i in nofpages(sub.subname)" data-ng-class="{'active' : {{$index+1}} == getcurrentPage(sub.subname)}">
+                      <a ng-click="changepage($index+1,sub.subname)">{{$index+1}}</a>
+            </li>
+
+
+        <li data-ng-class="{'disabled' : currentPage==nofpages(sub.subname)}"><a href="#">»</a></li>
+                    </ul>
+                  </div>
+                </div>
+</div> <!-- panel footer ends here  -->
+
+                            </div><!-- panel table ends here  -->
+
+                    </div> <!-- subject ng repeat ends here  -->
+
+
+
+
+
+
+                </div> <!-- row ends here -->
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <div class="container">
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; study BRO 2017</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('hmModule').controller("NavController", function($rootScope, $scope,MenuService) {
+angular.module('hmModule').controller("NavController", function($rootScope, $scope,MenuService,LoginService) {
     $scope.showChilds = function(item) 
     {
         item.active = !item.active;
@@ -45,7 +45,12 @@ angular.module('hmModule').controller("NavController", function($rootScope, $sco
     ];*/
     
     $rootScope.items = MenuService.getall();
+    $scope.logout=function ()
+        {
+            
+            LoginService.logout();
 
+        };
 
 });
 

@@ -13,10 +13,15 @@ app.constant('urls', {
    // VIDEO_SERVICE_API:"https://still-tor-67248.herokuapp.com/sb/landing/video"
     VIDEO_SERVICE_API:"http://localhost:8088/sb/landing/video",
     VIDEO_Library_API:"http://localhost:8088/sb/landing/videolibrary",
+    VIDEO_ADD_API:"http://localhost:8088/sb/video/create",
+    VIDEO_ADD_SUBJECT:"http://localhost:8088/sb/subject/create",
+    SUBJECT_NAME_API:"http://localhost:8088/sb/subject/all",
     MENU_ITEM_ADD_API: "http://localhost:8088/sb/menu/create",
     MENU_ITEM_ALL_API: "http://localhost:8088/sb/menu/all",
     USER_ADD_API: "http://localhost:8088/sb/user/register",
-    USER_LOGIN_API:"http://localhost:8088/sb/user/login"
+    USER_LOGIN_API:"http://localhost:8088/sb/user/login",
+    VIDEO_ADD_DESCRIPTION_BY_VIDEO_ID:"http://localhost:8088/sb/video/getDesc"
+    
 });
 
 app.constant('errors', {
@@ -118,13 +123,12 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 url: '/error',
                 templateUrl: 'angulartemplates/error.html',
                 controller: 'MainController',
-
                 requireLogin: false
 
             });
            
 
-        $urlRouterProvider.otherwise('/error');
+        $urlRouterProvider.otherwise('/home');
         // $provide provider is used to register the components in angular internally.
 
     }
@@ -189,5 +193,12 @@ app.run(function ($rootScope, $location, $state, LoginService, $localStorage, $s
 
 });
 
+app.filter('trustUrl', function ($sce) 
+    {
+         return function (url) 
+         {
+            return $sce.trustAsResourceUrl(url);
+        };
+    });
 
 

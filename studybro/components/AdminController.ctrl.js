@@ -1,5 +1,5 @@
 'use strict';
-angular.module('hmModule').controller("AdminController", function($rootScope, $scope,MenuService) 
+angular.module('hmModule').controller("AdminController", function($rootScope, $scope,MenuService,VideoService) 
 {
 	//$scope.menuitems=[];
 	$scope.menuitems=MenuService.getall();
@@ -100,5 +100,80 @@ $scope.menuitems[$scope.currentEditIndex].subItems[$scope.currentSubMenuEditInde
 	};
 
 
+	/*code to add a subjects videos*/
+	/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
+
+	$scope.subjects=VideoService.getSubjectNames();
+	$scope.addVideo=
+	{
+		videourl: "",
+		videoname:"",
+		subjectname:"",
+		classname:"",
+		semester:"",
+			price_status:'FREE',
+			headline:"",
+			review_counts:"",
+			ratings:"2"
+		
+
+	};
+	$scope.Addsubmit=function()
+	{
+		VideoService.addVideo($scope.addVideo).then(function(data) {
+            
+            setSuccessMessage('Video Added successfully');
+        }, function(error) 
+        {
+           
+          setErrorMessage("Error occured"+error);
+        });
+        reset();
+
+	};
+
+	$scope.newsubject="";
+	$scope.addnewsubject=function()
+	{
+		var apiResponse=VideoService.createSubject($scope.newsubject)
+
+            if (apiResponse=="success") {
+            	setSuccessMessage('Subject created successfully');
+            } else {
+            	 setErrorMessage("Error occured"+error);
+            }
+            
+        	reset();
+
+	};
+
+	$scope.successMessage = '';
+    $scope.errorMessage = '';
+
+	function setErrorMessage(errorMessage) {
+        $scope.errorMessage = errorMessage;
+    }
+
+    function setSuccessMessage(successMessage) {
+        $scope.successMessage = successMessage
+    }
+    function clearErrorAndSuccessMessages() {
+        $scope.errorMessage = '';
+        $scope.successMessage = '';
+    }
+
+    function reset()
+    {
+    	$scope.addVideo=
+		{
+			videourl: "",
+			videoname:"",
+			subjectname:"",
+			classname:"",
+			semester:""
+
+		};
+		$scope.newsubject='';
+    }
 });
     

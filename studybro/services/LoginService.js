@@ -1,13 +1,15 @@
 'use strict';
 
 angular.module('hmModule').factory('LoginService',
-    ['$localStorage','$http', '$q', 'urls',
-        function ($localStorage, $http, $q, urls) 
+    ['$localStorage','$cookieStore','$http', '$q','$rootScope', 'urls',
+        function ($localStorage,$cookieStore, $http, $q, urls,$rootScope) 
         {
 
             var factory = 
             {
-                login : login 
+                login : login ,
+                setVariables:setVariables,
+                logout:logout
             };
 
             return factory;
@@ -37,5 +39,25 @@ angular.module('hmModule').factory('LoginService',
                 return apiResponse;
 
             };
+
+            function setVariables(response)
+            {
+
+                $rootScope.userProp=response;
+                $rootScope.isUserLoggedIn=true;
+                $cookieStore.put('userstore',response);
+                $cookieStore.put('isLoggedIn','true');
+
+            };
+            function logout()
+            {
+                
+                delete $rootScope.userProp;
+                delete $rootScope.isUserLoggedIn;
+                $cookieStore.put('userstore','');
+                $cookieStore.put('isLoggedIn','false');
+                
+            };
+            
 
         }]);

@@ -16,12 +16,14 @@ angular.module('hmModule').controller("LoginController", function($rootScope, $s
 			var response=LoginService.login($scope.user);
 			if(response)
 			{
-				$rootScope.userProp=response;
+				//$rootScope.userProp=response;
 				$state.transitionTo('home');
-				$rootScope.isUserLoggedIn=true;
+				//$rootScope.isUserLoggedIn=true;
+				//$cookieStore.put('userstore',response);
+				LoginService.setVariables(response);
 			}
 		};
 		console.log('login controller called');
 		console.log($scope.user);
-
+		
 });
