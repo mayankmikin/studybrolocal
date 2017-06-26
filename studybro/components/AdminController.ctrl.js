@@ -1,5 +1,5 @@
 'use strict';
-angular.module('hmModule').controller("AdminController", function($rootScope, $scope,MenuService,VideoService) 
+angular.module('hmModule').controller("AdminController", function($rootScope, $scope,errors,MenuService,VideoService,ValidationServcie) 
 {
 	//$scope.menuitems=[];
 	$scope.menuitems=MenuService.getall();
@@ -132,19 +132,25 @@ $scope.menuitems[$scope.currentEditIndex].subItems[$scope.currentSubMenuEditInde
 
 	};
 
-	$scope.newsubject="";
+	$scope.newsubject=null;
 	$scope.addnewsubject=function()
 	{
+		if(ValidationServcie.nullcheck($scope.newsubject))
+		{
 		var apiResponse=VideoService.createSubject($scope.newsubject)
 
             if (apiResponse=="success") {
             	setSuccessMessage('Subject created successfully');
             } else {
-            	 setErrorMessage("Error occured"+error);
+            	 setErrorMessage("Error occured");
             }
             
         	reset();
-
+        }
+        else
+        {
+        	setErrorMessage(errors.NULL_CHECK);
+        }
 	};
 
 	$scope.successMessage = '';

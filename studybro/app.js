@@ -21,12 +21,12 @@ app.constant('urls', {
     USER_ADD_API: "http://localhost:8088/sb/user/register",
     USER_LOGIN_API:"http://localhost:8088/sb/user/login",
     VIDEO_ADD_DESCRIPTION_BY_VIDEO_ID:"http://localhost:8088/sb/video/getDesc"
-    
+
 });
 
 app.constant('errors', {
-    WRONG_CREDENTIALS: 'Incorrect username/password !'
-
+    WRONG_CREDENTIALS: 'Incorrect username/password !',
+    NULL_CHECK:'Field Cannot Be Empty'
 });
 app.constant('context', {
     PAGESIZE: '3'
