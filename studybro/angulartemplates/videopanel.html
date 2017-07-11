@@ -1,0 +1,307 @@
+<style type="text/css">
+    html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.playlist ul {
+    list-style-type: none;
+}
+
+.playlist ul a {
+    cursor: pointer;
+    color: #428bca;
+    text-decoration: none;
+}
+
+.playlist ul a:visited {
+    color: #428bca;
+}
+
+.playlist ul a:hover {
+    color: #428bca;
+    text-decoration: underline;
+}
+
+.videogular-container {
+    width: 100%;
+    height: 320px;
+    margin: auto;
+    overflow: hidden;
+    
+}
+
+.videogular-container .skipButton {
+    position: absolute;
+    padding: 10px;
+    top: 10px;
+    right: 10px;
+    z-index: 99999;
+    color: white;
+    cursor: pointer;
+    background-color: #666666;
+    border: 2px #FFFFFF solid;
+    display: none;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border-radius: 10px;
+
+}
+
+@media (min-width: 1200px) {
+    .videogular-container {
+        width: 1170px;
+        height: 658.125px;
+    }
+
+    .videogular-container.audio {
+        width: 1170px;
+        height: 50px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .videogular-container {
+        width: 940px;
+        height: 528.75px;
+    }
+
+    .videogular-container.audio {
+        width: 940px;
+        height: 50px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .videogular-container {
+        width: 728px;
+        height: 409.5px;
+    }
+
+    .videogular-container.audio {
+        width: 728px;
+        height: 50px;
+    }
+}
+
+.vid-thumb {
+      float:left;
+            margin-right: 8px;
+        }
+
+   .desc {
+            color: #CACACA;
+            font-size: 13px;
+            margin-top:5px;
+        } 
+
+</style>
+<style type="text/css">
+    body {
+    padding-top: 50px;
+}
+.dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+}
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+    #adv-search {
+        width: 500px;
+        margin: 0 auto;
+    }
+    .dropdown.dropdown-lg {
+        position: static !important;
+    }
+    .dropdown.dropdown-lg .dropdown-menu {
+        min-width: 500px;
+    }
+}
+</style>
+
+<style type="text/css">
+
+    #list-group {
+    height: 10px;
+    width: 10px;
+}
+
+span.lastUpdated.ng-binding {
+    margin-left: 100px;
+}
+
+div.vid-list-container {
+    margin-right: -200px;
+}
+
+div.videogular-container {
+    margin-left: 20px;
+}
+
+
+button.btn.btn-default.dropdown-toggle {
+    width: 80px;
+}
+
+span.glyphicon.glyphicon-search {
+    width: 38px;
+}
+
+input.form-control {
+    width: 1000px;
+    height: 45px;
+}
+
+div.input-group {
+    margin-left: 30px;
+}
+</style>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group" id="adv-search">
+                <input type="text" class="form-control" placeholder="Search for snippets" />
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <div class="dropdown dropdown-lg">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                             aria-expanded="false"><span class="caret"></span></button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <form class="form-horizontal" role="form">
+                                  <div class="form-group">
+                                    <label for="filter">Filter by</label>
+                                    <select class="form-control"
+                                     >
+                                        <option value="0" selected>All Snippets</option>
+                                        <option value="1">Featured</option>
+                                        <option value="2">Most popular</option>
+                                        <option value="3">Top rated</option>
+                                        <option value="4">Most commented</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="contain">Author</label>
+                                    <input class="form-control" type="text" />
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="contain">Contains the words</label>
+                                    <input class="form-control" type="text" />
+                                  </div>
+                                  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                </form>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+
+<div class="row">
+<div class="col-md-8">
+    <div class="videogular-container" style="margin-left: 20px !important;">
+        <videogular vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteVideo()" vg-theme="controller.config.theme.url">
+            <vg-media vg-src="controller.config.sources"
+                      vg-tracks="controller.config.tracks">
+            </vg-media>
+
+            <vg-controls>
+                <vg-play-pause-button></vg-play-pause-button>
+                <vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }}</vg-time-display>
+                <vg-scrub-bar>
+                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                </vg-scrub-bar>
+                <vg-time-display>{{ timeLeft | date:'mm:ss':'+0000' }}</vg-time-display>
+                <vg-volume>
+                    <vg-mute-button></vg-mute-button>
+                    <vg-volume-bar></vg-volume-bar>
+                </vg-volume>
+                <vg-fullscreen-button></vg-fullscreen-button>
+            </vg-controls>
+
+            <vg-overlay-play></vg-overlay-play>
+            <vg-buffering></vg-buffering>
+            <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+        </videogular>
+    </div>
+ </div>
+    
+<div class="col-md-1">
+</div>
+
+    <div class="col-md-2">
+
+    <!-- <div class="playlist">
+
+    
+        <ul>
+
+            <li><a ng-click="controller.setVideo(0)"><span class="vid-thumb"><img width=72 src="https://img.youtube.com/vi/vYoh2IgoBXg/default.jpg" /></span>
+            <div class="desc">Pale Blue Dot</div></a>
+            </li>
+
+
+            <li><a ng-click="controller.setVideo(1)">
+            <span class="vid-thumb"><img width=72 src="https://img.youtube.com/vi/vYoh2IgoBXg/default.jpg" /></span>
+            <div class="desc">Big Buck Bunny</div></a>
+            </li>
+
+
+        </ul>
+
+    </div> -->
+    <div class="table-responsive">
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+        <th><span class="label label-success">Physics Class 12</span><span class="badge">5</span> <STRONG>Videos</STRONG></th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr>
+      <td>
+          <span class="vid-thumb"><img width=72 src="https://img.youtube.com/vi/vYoh2IgoBXg/default.jpg" /></span>
+        <a ng-click="controller.setVideo(0)">Pale Blue Dot</a>
+      </td>
+      </tr>
+      <tr>
+      <td>
+      <span class="vid-thumb"><img width=72 src="https://img.youtube.com/vi/vYoh2IgoBXg/default.jpg" /></span>
+          <a ng-click="controller.setVideo(1)">Big Buck Bunny</a>
+      </td>
+      </tr>
+      </tbody>
+    </table>
+
+    </div>
+    </div>
+
+</div>
+
+

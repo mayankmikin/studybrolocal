@@ -1,0 +1,338 @@
+<style type="text/css">
+	
+	.panel-heading .panel-title:after{
+   /* symbol for "opening" panels */
+   font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+   content: "\e082";
+   float: right;
+   opacity:0.6;
+}
+.panel-heading.collapsed .panel-title:after  {
+   /* symbol for "collapsed" panels */
+   content: "\e081";
+}
+.pad-left {
+   padding-left:15px;
+}
+.panel-item {
+   padding:30px;
+}
+.panel .nav-tabs {
+   margin-top:1px;
+}
+.panel .tab-pane {
+   padding-bottom:15px;
+}
+
+.padding10,.btn.padding10 {
+   padding:10px;
+}
+.padding20,.btn.padding20 {
+   padding:20px;
+}
+.padding30,.btn.padding30 {
+   min-width:110px;
+   padding:30px;
+   display:block;
+}
+.v-center-container {display:table;}
+.v-center {
+align-self: center;
+	 display: flex;
+  align-items: center;
+  justify-content: center;
+}
+    
+
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th { display: block; }
+.table-fixed tr:after {
+  content: ' ';
+  display: block;
+  visibility: hidden;
+  clear: both;
+}
+.table-fixed thead {
+  width: 97%;
+}
+.table-fixed thead th {
+  height: 30px;
+}
+.table-fixed tbody {
+  height: 230px;
+  overflow-y: auto;
+  width:100%;
+}
+.table-fixed tbody td,
+.table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width:0;
+}
+
+.alerts {
+ position:fixed;
+ width:300px;
+ right:30px;
+ top:30px;
+ z-index:10; 
+}
+.alerts>.alert-dismissable {
+ position:relative;
+ z-index:11;
+ min-width:250px;
+}
+
+
+/* refresh plugin */
+.refresh-container {
+ position:absolute;
+ top:0;
+ right:0;
+ background:rgba(200,200,200,0.25);
+ width:100%;
+ height:100%;
+ display: none;
+ text-align:center;
+ z-index:4;
+}
+
+.refresh-spinner {
+ margin-top:20%;
+ opacity: 0.8;
+}
+/* end refresh plugin */
+
+
+
+
+</style>
+
+<div class="main_bg">
+<div class="wrap">
+<div class="wrapper">
+	<div class="main">
+
+
+
+
+
+
+
+
+
+<!--angular-app-->
+<div >
+  <div id="myApp">
+    
+    <div class="alerts" ng-shw="noty.queue.length>0">
+      <div class="alert alert-{{(m.type)||'info'}} alert-dismissable fade in pull-right" ng-repeat="m in noty.queue">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <label>{{m.title}}</label>
+        <div>{{m.body}}</div>
+      </div>
+    </div>
+
+    <!--breadcrumb-->
+    <div class="container-fluid">
+      <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Category</a></li>
+        <li class="active">Sub-section</li>
+      </ol>
+    </div>
+    <!--/breadcrumb-->
+    
+    <!--big icon bar-->
+    <div class="container-fluid">
+      <ul class="nav nav-justified" id="iconbar">
+        <li><a class="text-center" href="#"><i class="fa fa-tag fa-5x"></i> <br>Tags</a></li>
+        <li><a class="text-center" href="#"><i class="fa fa-bookmark fa-5x"></i> <br>Tasks</a></li>
+        <li><a class="text-center" href="#"><i class="fa fa-camera fa-5x"></i> <br>Photos</a></li>
+        <li><a class="text-center" href="#"><i class="fa fa-map-marker fa-5x"></i> <br>Tour</a></li>
+        <li><a class="text-center" href="#"><i class="fa fa-music fa-5x"></i> <br>Tunes</a></li>
+        <li><a class="text-center" href="#"><i class="fa fa-book fa-5x"></i> <br>Books</a></li>
+        <li><a class="text-center" href="#"><i class="fa fa-film fa-5x"></i> <br>Add Videos</a></li>
+      </ul>
+    </div>
+    <!--/big icon bar-->
+    
+    <hr>
+
+    <!--example panels-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+            
+               <!--panel-->
+               <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-target="#collapse1">
+                  <h3 class="panel-title">
+                    Collapsible Panel
+                  </h3>
+                </div>
+                <div id="collapse1" class="collapse in">
+                  <div class="panel-body">
+                      <blockquote>
+                        <p>"Click my heading to make me collapse"</p>
+                      </blockquote>
+                      <button class="btn btn-default pull-right" id="btn1">Button</button>
+                  </div>
+                </div>
+              </div><!--/panel-->
+              
+              <!--panel-->
+              <div class="panel panel-default">
+                <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseList">
+                  <h3 class="panel-title">
+                    Collapsible List Group
+                  </h3>
+                </div>
+                <ul id="collapseList" class="list-group collapse">
+                   <li class="list-group-item">Bootply</li>
+                   <li class="list-group-item">Triveo</li>
+                   <li class="list-group-item">Behance</li>
+                </ul>
+              </div><!--/panel-->
+              
+              <!--notify widget-->
+              <div class="panel panel-default">
+                <div class="panel-heading"><h4>Notify Widget</h4></div>
+                <div class="panel-body">
+                  <p><strong>Display Feedback</strong></p>
+                    <div class="well"> 
+                      Use the AngularJS notify service to display growler like alerts to users. Alerts can be triggered
+                      from JavaScript, jQuery or directly in the scope of the included AngularJS app.
+                    </div>
+                    <div> 
+                      <button ng-click="noty.add({type:'info',title:'Informational alert..'})" class="btn btn-info">Info Alert</button>
+                      <button ng-click="noty.add({type:'warning',title:'Warning alert..'})" class="btn btn-warning">Warning Alert</button>
+                      <button ng-click="noty.add({type:'danger',title:'Oh no!',body:'Error alert..'})" class="btn btn-danger">Error Alert</button>
+                    </div>
+                </div>
+              </div>
+              <!--notify widget-->
+              
+            </div><!--/col-->
+            <div class="col-sm-6">
+          
+               <!--panel-->
+               <div class="panel panel-default">
+                <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse2">
+                  <h3 class="panel-title">
+                    Collapsed Panel
+                  </h3>
+                </div>
+                <div id="collapse2" class="collapse">
+                  <div class="panel-body">
+                      <blockquote>
+                        <p>"Click my heading to toggle me"</p>
+                      </blockquote>
+                      
+                      <p>Wow, that's clever!</p>
+                  </div>
+                </div>
+              </div><!--/panel-->
+              
+              <!--panel-info-->
+              <div class="panel panel-info">
+                <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse3">
+                  <h3 class="panel-title">
+                    Collapsed Panel (info)
+                  </h3>
+                </div>
+                <div id="collapse3" class="collapse">
+                  <div class="panel-body">
+                    <blockquote>
+                        <p>"Click my heading to toggle me"</p>
+                    </blockquote>
+                      
+                    <p>This panel has the <code>panel-info</code> context.</p>
+                  </div>
+                </div>
+              </div><!--/panel-info-->
+             
+              <!--panel-->
+              <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-target="#collapseList2">
+                  <h3 class="panel-title">
+                    Collapsible Linked List Group
+                  </h3>
+                </div>
+                <div id="collapseList2" class="list-group collapse in">
+                   <a href="#" class="list-group-item"><span class="pull-right badge badge-default">44</span> Link 1</a>
+                   <a href="#" class="list-group-item"><span class="pull-right badge badge-default">8</span> Link 2</a>
+                   <a href="#" class="list-group-item"><span class="pull-right badge badge-default">23</span> Link 3</a>
+                   <a href="#" class="list-group-item text-muted">Link n..</a>
+                </div>
+              </div><!--/panel-->
+              
+              <!--panel-danger-->
+              <div class="panel panel-danger">
+                <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse4">
+                  <h3 class="panel-title">
+                    Collapsed Panel (danger)
+                  </h3>
+                </div>
+                <div id="collapse4" class="collapse">
+                  <div class="panel-body">
+                    <p>This panel has the <code>panel-danger</code> context so it works well for warnings or alerts.</p>
+                  </div>
+                </div>
+              </div><!--/panel-danger-->
+              
+            </div><!--/col-->
+        </div><!--/row-->
+    </div><!--/container-->
+
+
+   </div><!--/angular-app-ctrl-->
+</div><!--/angular-app-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div class="clear"></div>
+	</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+// jquery functions and plugins
+$(document).ready(function(){
+  
+  var scope = angular.element($('#myApp')).scope();
+  
+  // hook into angular noty service from Bootstrap jquery event
+  $('.collapse').on('hide.bs.collapse',function(){
+    scope.$apply(function(){
+    	scope.noty.add({type:'danger',title:'Hey!',body:'That panel was just collapsed.'});
+    });
+  });
+  
+  $('#btn1').on('click',function(){
+    scope.$apply(function(){
+    	scope.noty.add({type:'warning',title:'Wow',body:'You`re a really good button clicker!'});
+    });
+  });
+  
+});
+</script>

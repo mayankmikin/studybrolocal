@@ -13,7 +13,8 @@ angular.module('hmModule').factory('RegisterService',
 
             function saveuser(user)
             {
-            	console.log(user)
+                console.log('input to service is ');
+             	console.log(user)
             	/*var apiResponse;
                  $.ajax({
                 async: false,
@@ -37,19 +38,26 @@ angular.module('hmModule').factory('RegisterService',
             });
         
                 return apiResponse;*/
+              // var apiResponse;
                 var deferred = $q.defer();
                 var url = urls.USER_ADD_API;
                 $http.post(url, user)
                     .then(
                         function (response) {
+                            
                             deferred.resolve(response);
+                            //console.log('data is ');
+                            //console.log(response.data);
+                           
                         },
                         function (errResponse) {    
                             deferred.reject(errResponse);
+                         
                         }
+                        
                     );
-                return deferred.promise;
-
+                 return deferred.promise;
+                // return apiResponse;
             }
 
 

@@ -1,191 +1,106 @@
 
-<style type="text/css">
- 
-body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-}
 
-.slide-image {
-    width: 100%;
-}
-
-.carousel-holder {
-    margin-bottom: 30px;
-}
-
-.carousel-control,
-.item {
-    border-radius: 4px;
-}
-
-.caption {
-    height: 130px;
-    overflow: hidden;
-}
-
-.caption h4 {
-    white-space: nowrap;
-}
-
-.thumbnail img {
-    width: 100%;
-}
-
-.ratings {
-    padding-right: 10px;
-    padding-left: 10px;
-    color: #d17581;
-}
-
-.thumbnail {
-    padding: 0;
-}
-
-.thumbnail .caption-full {
-    padding: 9px;
-    color: #333;
-}
-
-footer {
-    margin: 50px 0;
-}   
-
-</style>
-<!-- Page Content -->
-    <div class="container">
-
-        <div class="row">
-
-            <div class="col-md-3">
-                <p class="lead">Download Now</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Class 11th Notes</a>
-                    <a href="#" class="list-group-item">Class 12th Notes</a>
-                    <a href="#" class="list-group-item">BCA Notes</a>
-                    <a href="#" class="list-group-item">MCA Notes</a>
-                </div>
-            </div>
-
-            <div class="col-md-9">
-
-                <div class="row carousel-holder">
-
-                    <div class="col-md-12">
-                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                </div>
-                            </div>
-                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
-                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
-                        </div>
-                    </div>
-
-                </div> 
-     <!-- main carousel ends here  -->
-
-        <div class="row" >
-        <div id="{{sub.subname}}" class="col" ng-repeat="sub in subjects">
-            <div class="panel panel-default panel-table">
-             <div class="panel-heading">
-                <div class="row">
-                  <div class="col col-xs-6">
-                    <h3 class="panel-title">{{sub.subname}}</h3>
-                  </div>
-                  <div class="col col-xs-6 text-right">
-                    <button type="button" class="btn btn-sm btn-primary btn-create">Get All Videos</button>
-                  </div>
-                </div>
-              </div>
-            <div class="panel-body">
-                <table class="table table-striped table-bordered table-list">
-                    <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="prop in getInmemorypages(sub.subname) | limitTo:'pagelimits'">
-                        <div class="thumbnail">
-                            <!-- <img src="http://placehold.it/320x150" alt=""> -->
-<iframe id="{{sub.subname}}-{{$index+1}}" class="col-lg-12 col-md-12 col-sm-12" src="{{prop.url_name | trustUrl}}" frameborder="0" allowfullscreen>
-</iframe>
-                            <div class="caption">
-                                <h4 class="pull-right">{{prop.description.price_status}}</h4>
-                            <h4><a href="#">{{prop.video_name}}</a>
-                                </h4>
-                                <p>Watch it on Youtube<a target="_blank" href="{{prop.url_name}}">Go to Direct Link</a>.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">{{prop.description.review_counts}} reviews</p>
-                                <p>
-
-
-            <span class="glyphicon glyphicon-star" ng-repeat="n in range(prop.description.ratings)"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div> <!-- ngrepeat videourls ends here  -->
-                    </table>
-                     </div> <!-- panel body ends here  -->
-<div class="panel-footer">
-                      <!-- pager -->
-                 <div class="row">
-
-                  <div class="col col-xs-12">
-                <ul class="pagination hidden-xs pull-left" >
-                    <li data-ng-class="{'disabled' : currentPage==1}"><a href="#">«</a></li>
-
-
-    <li ng-repeat="i in nofpages(sub.subname)" data-ng-class="{'active' : {{$index+1}} == getcurrentPage(sub.subname)}">
-                      <a ng-click="changepage($index+1,sub.subname)">{{$index+1}}</a>
-            </li>
-
-
-        <li data-ng-class="{'disabled' : currentPage==nofpages(sub.subname)}"><a href="#">»</a></li>
-                    </ul>
-                  </div>
-                </div>
-</div> <!-- panel footer ends here  -->
-
-                            </div><!-- panel table ends here  -->
-
-                    </div> <!-- subject ng repeat ends here  -->
-
-
-
-
-
-
-                </div> <!-- row ends here -->
-            </div>
-        </div>
-
-    </div>
-    <!-- /.container -->
-
-    <div class="container">
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; study BRO 2017</p>
-                </div>
-            </div>
-        </footer>
-
-    </div>
-    <!-- /.container -->
+	<div class="clear"></div>
+<div class="wrap">
+<div class="wrapper">
+<div class="main_text">
+		<h2>A place of light, of liberty, and learning</h2>
+		<h3>we provide leading intensive courses</h3>
+	</div>	
+	<div class="grids_1_of_4">
+				<div class="grid_1_of_4 images_1_of_4 bg1">
+					 <img src="images/icon1.png">
+				</div>
+				<div class="grid_1_of_4 images_1_of_4 bg2">
+					 <img src="images/icon2.png">
+				</div>
+				<div class="grid_1_of_4 images_1_of_4 bg3 hide">
+					 <img src="images/icon3.png">
+				</div>
+				<div class="grid_1_of_4 images_1_of_4 bg4 hide">
+					 <img src="images/icon4.png">
+				</div>
+			<div class="clear"></div>
+			</div>
+			<div class="section group">
+				<div class="col_1_of_4 span_1_of_4">
+					<h3>Mauris at eratos</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<div class="text1-nav">
+						<ul>
+						<li><a href="">The standard chunk of</a></li>
+							<li><a href="">Duis a augue euismod</a></li>
+							<li><a href="">The standard of Lorem</a></li>
+							<li><a href="">Duis a augue euismod</a></li>
+					    </ul>
+					</div>
+					<div class="button">
+						<a href="details.html">learn more</a>
+					</div>
+				</div>
+				<div class="col_1_of_4 span_1_of_4">
+					<h3>imperdiet dolor</h3>
+					<p>Ut enim ad minim veniam,laboris commodo consequat.Duis aute dolor in reprehenderit in voluptate velit esse cillum dolore nulla pariatur.</p>
+					<div class="text1-nav">
+						<ul>
+						<li><a href="">The standard chunk of</a></li>
+							<li><a href="">Duis a augue euismod</a></li>
+							<li><a href="">The standard of Lorem</a></li>
+							<li><a href="">Duis a augue euismod</a></li>
+					    </ul>
+					</div>
+					<div class="button">
+						<a href="details.html">learn more</a>
+					</div>
+				</div>
+				<div class="col_1_of_4 span_1_of_4 hide">
+					<h3>Sed porta justjm</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<div class="text1-nav">
+						<ul>
+						<li><a href="">The standard chunk of</a></li>
+							<li><a href="">Duis a augue euismod</a></li>
+							<li><a href="">The standard of Lorem</a></li>
+							<li><a href="">Duis a augue euismod</a></li>
+					    </ul>
+					</div>
+					<div class="button">
+						<a href="details.html">learn more</a>
+					</div>
+				</div>
+				<div class="col_1_of_4 span_1_of_4 hide">
+					<h3>nisi vulputate</h3>
+					<p>Ut enim ad minim veniam,laboris commodo consequat.Duis aute dolor in reprehenderit in voluptate velit esse cillum dolore nulla pariatur.</p>
+					<div class="text1-nav">
+						<ul>
+						<li><a href="">The standard chunk of</a></li>
+							<li><a href="details.html">Duis a augue euismod</a></li>
+					    </ul>
+					</div>
+						<div class="button">
+						<a href="details.html">learn more</a>
+					</div>
+				</div>
+			<div class="clear"></div>
+			</div>
+	</div>
+	</div>
+<div class="main_bg">
+<div class="wrap">
+<div class="wrapper">
+	<div class="main">
+			<div class="grid_1_of_2 images_1_of_2">
+				<h4>Lorem Ipsum is simply <span>dummy text of the</span> ornare vulputate printing and typesetting There are many variations of passages of.</h4>
+				<p class="para">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. </p>
+				<div class="button1">
+					<a href="details.html" class="btn btn_s">view More</a>
+				</div>
+			</div>
+			<div class="grid_1_of_2 images_1_of_2 img_style">
+				<img src="images/pic1.jpg" alt="">
+			</div>
+			<div class="clear"></div>
+	</div>
+</div>
+</div>
+</div>

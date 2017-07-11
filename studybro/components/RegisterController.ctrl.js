@@ -18,7 +18,13 @@ angular.module('hmModule').controller("RegisterController", function ($scope, $r
 	{
 		//console.log("user is");
 		//console.log($scope.user);
-		RegisterService.saveuser($scope.user);
+		var response=RegisterService.saveuser($scope.user);
+		if(response)
+		{
+			console.log('response is');
+			console.log(response);
+			$rootScope.activealert=true;
+		}
 
 	};
 	

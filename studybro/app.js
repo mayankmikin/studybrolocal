@@ -1,4 +1,9 @@
-var app = angular.module('hmModule', ['ui.router', 'ngStorage', 'ngCookies']);
+var app = angular.module('hmModule', ['ui.router', 'ngStorage', 'ngCookies','ui.bootstrap',"ngSanitize",
+            'com.2fdevs.videogular',
+            "com.2fdevs.videogular.plugins.controls",
+            "com.2fdevs.videogular.plugins.overlayplay",
+            "com.2fdevs.videogular.plugins.poster",
+            "com.2fdevs.videogular.plugins.buffering"]);
 //var appp = angular.module('hmModule',[]);
 var StacktraceService = function () { }
 StacktraceService.prototype.print = function ($window, exception) {
@@ -20,13 +25,19 @@ app.constant('urls', {
     MENU_ITEM_ALL_API: "http://localhost:8088/sb/menu/all",
     USER_ADD_API: "http://localhost:8088/sb/user/register",
     USER_LOGIN_API:"http://localhost:8088/sb/user/login",
-    VIDEO_ADD_DESCRIPTION_BY_VIDEO_ID:"http://localhost:8088/sb/video/getDesc"
-
+    VIDEO_ADD_DESCRIPTION_BY_VIDEO_ID:"http://localhost:8088/sb/video/getDesc",
+    STATES_API:"http://localhost:8088/sb/state/search/findBystatename?statename="
 });
 
 app.constant('errors', {
     WRONG_CREDENTIALS: 'Incorrect username/password !',
-    NULL_CHECK:'Field Cannot Be Empty'
+    NULL_CHECK:'Field Cannot Be Empty',
+    EXCLAIM_ERROR:'Error!',
+    FOLLOWUP_MESSAGE_REGISTER_FAILURE:'Change a few things up and try submitting again..'
+});
+app.constant('success', {
+    EXCLAIM_CONGRATS:'Congratulations!',
+    FOLLOWUP_MESSAGE_REGISTERED: 'You have successfully Registered.'
 });
 app.constant('context', {
     PAGESIZE: '3'
@@ -64,14 +75,13 @@ app.config(['$stateProvider', '$urlRouterProvider',
     function ($stateProvider, $urlRouterProvider, $provide) {
 
         $stateProvider
-    
-            .state('login', {
-                url: '/login',
-                templateUrl: 'angulartemplates/login.html',
-                controller: 'LoginController',
+        .state('contact', {
+                url: '/contact',
+                templateUrl: 'angulartemplates/contact.html',
+                controller: 'ContactController',
                 requireLogin: false
             })
-            .state('home', {
+        .state('home', {
                 url: '/home',
                 templateUrl: 'angulartemplates/home.html',
                 controller: 'MainController',
@@ -79,6 +89,58 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 requireLogin: false
 
             })
+            .state('login', {
+                url: '/login',
+                templateUrl: 'angulartemplates/login.html',
+                controller: 'LoginController',
+                requireLogin: false
+            })
+            .state('error', {
+                url: '/error',
+                templateUrl: 'angulartemplates/notfound.html',
+                controller: 'MainController',
+                requireLogin: false
+
+            })
+            .state('BCA', {
+                url: '/BCA',
+                templateUrl: 'angulartemplates/bca.html',
+                controller: 'StateController',
+                requireLogin: false
+
+            })
+            .state('MCA', {
+                url: '/MCA',
+                templateUrl: 'angulartemplates/mca.html',
+                controller: 'StateController',
+                requireLogin: false
+
+            })
+            .state('BTECH', {
+                url: '/BTECH',
+                templateUrl: 'angulartemplates/btech.html',
+                controller: 'StateController',
+                requireLogin: false
+
+            })
+            .state('watch', {
+                url: '/watch',
+                templateUrl: 'angulartemplates/videopanel.html',
+                controller: 'VpanelController',
+                controllerAs: 'controller',
+                requireLogin: false
+
+            })
+            .state('admin', {
+                url: '/admin',
+                templateUrl: 'angulartemplates/adminpanel.html',
+                controller: 'AdminController',
+
+                requireLogin: false
+
+            })
+            
+            /*;
             .state('vvdav', {
                 url: '/vvdav',
                 templateUrl: 'angulartemplates/vvdav.html',
@@ -125,10 +187,10 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 controller: 'MainController',
                 requireLogin: false
 
-            });
+            });*/
            
 
-        $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/error');
         // $provide provider is used to register the components in angular internally.
 
     }
@@ -142,13 +204,13 @@ app.run(function ($rootScope, $location, $state, LoginService, $localStorage, $s
     {
             console.log('Changed state to: ');
             console.log(toState);
-            if(toState.name=='login')
+            if(toState.name=='home')
             {
-                $rootScope.showsidebar=false;
+                $rootScope.showcarousel=true;
             }
             else
             {
-                $rootScope.showsidebar=true;
+                $rootScope.showcarousel=false;
             }
 
             /*var requireLogin = toState.requireLogin;

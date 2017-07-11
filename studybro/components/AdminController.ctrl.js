@@ -1,5 +1,5 @@
 'use strict';
-angular.module('hmModule').controller("AdminController", function($rootScope, $scope,errors,MenuService,VideoService,ValidationServcie) 
+angular.module('hmModule').controller("AdminController", function($rootScope, $scope,noty,errors,MenuService,VideoService,ValidationServcie) 
 {
 	//$scope.menuitems=[];
 	$scope.menuitems=MenuService.getall();
@@ -179,7 +179,14 @@ $scope.menuitems[$scope.currentEditIndex].subItems[$scope.currentSubMenuEditInde
 			semester:""
 
 		};
-		$scope.newsubject='';
+		$scope.newsubject=null;
     }
+
+    $scope.noty = noty; // notify service
+    
+    /* test notify */
+   // noty.add({title:'Welcome',body:'Hello. This is an alert message'});
+
+
 });
     

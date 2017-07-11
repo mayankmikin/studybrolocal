@@ -1,0 +1,39 @@
+	<div class="clear"></div>
+<div class="wrap">
+<div class="wrapper">
+<div class="main_text">
+		<h2>A place of light, of liberty, and learning</h2>
+		<h3>we provide leading intensive courses</h3>
+	</div>	
+	<div class="grids_1_of_4">
+				
+				<div class="grid_1_of_4 images_1_of_4 bg2" ng-repeat="tabs in tabsArray">
+				<!-- <img src="images/icon2.png"> -->
+				<p>
+ <img src = 'images/icon2.png' style='vertical-align: bottom' />
+ <br>{{tabs.tabname}}
+				</p>
+</div>
+				
+			<div class="clear"></div>
+			</div>
+			<div class="section group">
+				<div class="col_1_of_4 span_1_of_4" ng-repeat="tabs in tabsArray">
+					<h3>{{tabs.heading}}</h3>
+					<p>{{tabs.tabname}}</p>
+					<div class="text1-nav">
+						<ul>
+						<li ng-repeat="url in tabs.AllUrList">
+						<a href="">{{url}}</a>
+						</li>
+					    </ul>
+					</div>
+					<div class="button">
+						<a href="details.html">learn more</a>
+					</div>
+				</div>
+				
+			<div class="clear"></div>
+			</div>
+	</div>
+	</div>
